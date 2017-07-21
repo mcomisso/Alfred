@@ -8,6 +8,7 @@ const forecast = new DarkSky(process.env.DARKSKY_TOKEN);
 const _ = require('underscore');
 const chrono = require('chrono-node');
 const s = require("underscore.string");
+const cats = require('cats-js');
 
 // Telegram BOT API
 const TelegramBot = require('node-telegram-bot-api');
@@ -89,7 +90,7 @@ bot.onText(/\/weather(.+)?/, function(msg, match) {
 
     London.exclude(exclude).get().then(function(response) {
         // Print response
-        console.log(response);
+        // console.log(response);
         var message = parseResponse(response);
         bot.sendMessage(chatId, message);
     });
@@ -112,20 +113,21 @@ bot.onText(/\/remember (.+)/, function (msg, match) {
     console.log(date);
 });
 
-/*
-* forecast
-    .latitude('37.8267')            \\ required: latitude, string.
-    .longitude('-122.423')          \\ required: longitude, string.
-    .time('2016-01-28')             \\ optional: date, string 'YYYY-MM-DD'.
-    .units('ca')                    \\ optional: units, string, refer to API documentation.
-    .language('en')                 \\ optional: language, string, refer to API documentation.
-    .exclude('minutely,daily')      \\ optional: exclude, string, refer to API documentation.
-    .extendHourly(true)             \\ optional: extend, boolean, refer to API documentation.
-    .get()                          \\ execute your get request.
-    .then(res => {                  \\ handle your success response.
-        console.log(res)
-    })
-    .catch(err => {                 \\ handle your error response.
-        console.log(err)
-    })
-* */
+const http = require('http');
+bot.onText(/\/cats/, function (msg, match) {
+    var c = new cats();
+
+    c.get().then(cat => {
+        //console.log(cat);
+        //console.log(cat.images.image.url);
+
+        utils.checkUrlExists(cat.images.image.url, function (success) {
+            if (success) {
+                bot.sendPhoto(msg.chat.id, cat.images.image.url);
+            } else {
+                bot.sendMessage(msg.chat.id, "No cats available :(");
+            }
+        });
+    });
+
+});
