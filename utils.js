@@ -2,8 +2,8 @@
 
 const _ = require('underscore');
 
-var http = require('http'),
-    url = require('url');
+var http = require('http');
+var url = require('url');
 
 exports.checkUrlExists = function (Url, callback) {
     var options = {
@@ -13,7 +13,12 @@ exports.checkUrlExists = function (Url, callback) {
         path: url.parse(Url).pathname
     };
     var req = http.request(options, function (r) {
-        callback( r.statusCode== 200);});
+        callback( r.statusCode == 200);});
+
+    req.on('error', (e) => {
+        console.error(`problem with request: ${e.message}`);
+    });
+
     req.end();
 };
 
