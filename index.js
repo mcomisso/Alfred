@@ -35,7 +35,7 @@ bot.onText(/\/weather(.+)?/, function(msg, match) {
     var parseResponse;
 
     var switchValue;
-    if (_.isUndefined(match[1])) {
+    if (_.isUndefined(match[1]) || _.isEmpty(match[1])) {
         switchValue = "now";
     } else {
         switchValue = s(match[1]).trim().value();
@@ -107,7 +107,6 @@ bot.onText(/\/remember (.+)/, function (msg, match) {
 
     console.log(msg);
 
-    msg.replace(text, '');
     console.log(text);
     console.log(msg);
     console.log(date);
