@@ -2,13 +2,15 @@
 
 require('dotenv').config();
 
+// ARGS
+var args = process.argv.slice(2);
+
 const chrono = require('chrono-node');
-const utils = require('./utils');
 
 // Actions
 const cats = require('./actions/cats');
+const setup = require('./actions/setup');
 const weather = require('./actions/weather');
-
 
 const realm = require('./model');
 
@@ -18,40 +20,10 @@ const TelegramBot = require('node-telegram-bot-api');
 // const MATT_CHAT = 3729713;
 // const SHARED_CHAT = -125161080;
 
-const bot = new TelegramBot(process.env.TELEGRAM_TOKEN, {polling: true});
+var token = (args[0] == 'test') ? process.env.TEOBOTTEO_TOKEN : process.env.TELEGRAM_TOKEN;
+
+const bot = new TelegramBot(token, {polling: true});
 
 cats.registerCatAction(bot);
 weather.registerWeatherAction(bot);
-
-bot.onText(/\/remember(.+)/, (msg, match) => {
-
-    switch (match[1]) {
-
-        default:
-            // Just print the list of saved memos
-
-            var user = realm.findUserFromChatId(msg.chat.id);
-
-            if (_.isUndefined(user)) {
-                // Create user
-
-                realm.createNewUserFromMsg(msg);
-            }
-
-    }
-
-    // memo
-
-    // scheduler
-
-    var dateResults = chrono.parse(match.join(' '));
-    var text = dateResults[0].text;
-    var date = dateResults[0].start.date();
-
-    console.log(msg);
-
-    console.log(text);
-    console.log(msg);
-    console.log(date);
-
-});
+setup.registerSetupAction(bot);
