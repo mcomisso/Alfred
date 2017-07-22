@@ -7,6 +7,9 @@ exports.registerCatAction = function (bot) {
     bot.onText(/\/cats/, function (msg, match) {
         var c = new cats();
 
+
+        bot.sendChatAction(msg.chat.id, 'upload_photo');
+
         console.log(msg);
         c.get().then(cat => {
             //console.log(cat);
@@ -15,8 +18,6 @@ exports.registerCatAction = function (bot) {
             utils.checkUrlExists(cat.images.image.url, function (success) {
                 if (success) {
                     bot.sendPhoto(msg.chat.id, cat.images.image.url);
-                } else {
-                    bot.sendMessage(msg.chat.id, "No cats available :(");
                 }
             });
         });
