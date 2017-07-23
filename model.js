@@ -44,12 +44,13 @@ exports.createNewUserFromMsg = function (msg) {
 
     try {
         realm.write(() => {
+            // Create or update user
             realm.create('User', {
                 first_name: tuser.first_name,
                 last_name: tuser.last_name,
                 username: tuser.username,
                 chatId: tuser.id
-            });
+            }, true);
         });
     } catch (e) {
         console.error(e.message);
