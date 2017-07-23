@@ -118,6 +118,7 @@ bot.onText(/\/remember (.+)/, function (msg, match) {
     console.log(date);
 });
 
+
 const http = require('http');
 bot.onText(/\/cats/, function (msg, match) {
     var c = new cats();
@@ -131,10 +132,12 @@ bot.onText(/\/cats/, function (msg, match) {
         utils.checkUrlExists(cat.images.image.url, function (success) {
             if (success) {
                 bot.sendPhoto(msg.chat.id, cat.images.image.url);
-            } else {
-                bot.sendMessage(msg.chat.id, "No cats available :(");
             }
         });
+
+    }).catch((err) => {
+        console.error(err.message);
+        bot.sendMessage(msg.chat.id, "Cat ran away, try again :(");
     });
 
 });
