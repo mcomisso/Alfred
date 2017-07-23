@@ -2,17 +2,17 @@
 
 const _ = require('underscore');
 
-var http = require('http');
-var url = require('url');
+let http = require('http');
+let url = require('url');
 
 exports.checkUrlExists = function (Url, callback) {
-    var options = {
+    let options = {
         method: 'HEAD',
         host: url.parse(Url).host,
         port: 80,
         path: url.parse(Url).pathname
     };
-    var req = http.request(options, function (r) {
+    let req = http.request(options, function (r) {
         callback( r.statusCode == 200);});
 
     req.on('error', (e) => {
@@ -25,10 +25,18 @@ exports.checkUrlExists = function (Url, callback) {
 exports.calculateMinMax = function (values, key) {
     var retval = {};
 
-    var streamlinedValues = _.pluck(values, key);
+    let streamlinedValues = _.pluck(values, key);
 
     retval['min'] = _.min(streamlinedValues);
     retval['max'] = _.max(streamlinedValues);
 
     return retval;
+};
+
+exports.userDataFromMsg = function (msg) {
+    let data = {
+        first_name: msg.from.first_name,
+        last_name: msg.from.last_name
+    };
+    return data
 };
