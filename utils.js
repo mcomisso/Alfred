@@ -25,7 +25,7 @@ exports.checkUrlExists = function (Url, callback) {
 exports.calculateMinMax = function (values, key) {
     var retval = {};
 
-    let streamlinedValues = _.pluck(values, key);
+    let streamlinedValues = _.map(values, key);
 
     retval['min'] = _.min(streamlinedValues);
     retval['max'] = _.max(streamlinedValues);
