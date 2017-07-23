@@ -2,11 +2,14 @@
 const cats = require('cats-js');
 const utils = require('../utils');
 
+const botanio = require('../botan');
+
 exports.registerCatAction = function (bot) {
 
     bot.onText(/\/cats/, function (msg, match) {
         var c = new cats();
 
+        botanio.trackMessage(msg, 'cats');
 
         bot.sendChatAction(msg.chat.id, 'upload_photo');
 
@@ -20,6 +23,9 @@ exports.registerCatAction = function (bot) {
                     bot.sendPhoto(msg.chat.id, cat.images.image.url);
                 }
             });
+        }).catch((err) => {
+            console.error(err.message);
+            bot.sendMessage(msg.chat.id, 'Cat ran away! :(');
         });
     });
 

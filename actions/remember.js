@@ -1,10 +1,12 @@
 'use strict';
 
-const chrono = require('chrono-node');
-const realm = require('../model');
-var CronJob = require('cron').CronJob;
+let chrono = require('chrono-node');
+let realm = require('../model');
+let CronJob = require('cron').CronJob;
 let moment = require('moment');
 let _ = require('lodash');
+
+let botanio = require('../botan');
 
 
 exports.registerRememberAction = function (bot) {
@@ -13,6 +15,8 @@ exports.registerRememberAction = function (bot) {
         // memo
 
         // scheduler
+
+        botanio.trackMessage(msg, 'remember');
 
         let fullCommand = match.join(' ');
 

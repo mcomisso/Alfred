@@ -7,7 +7,6 @@ var args = process.argv.slice(2);
 var token = (args[0] == 'test') ? process.env.TEOBOTTEO_TOKEN : process.env.TELEGRAM_TOKEN;
 
 // Actions
-const botanio = require('./botan');
 const cats = require('./actions/cats');
 const setup = require('./actions/setup');
 const weather = require('./actions/weather');
