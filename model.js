@@ -9,6 +9,7 @@ const ReminderSchema = {
     primaryKey: 'id',
     properties: {
         id: 'int',
+        chatId: 'int',
         text: 'string',
         date: 'date',
     }
@@ -30,7 +31,12 @@ const UserSchema = {
 
 // FUNCTIONS
 
-let realm = new Realm({schema: [ReminderSchema, UserSchema], schemaVersion: 2});
+let realm = new Realm({schema: [ReminderSchema, UserSchema], schemaVersion: 3});
+
+exports.listRemindersForUser = function (chatId) {
+    let user = this.findUserFromChatId(chatId);
+    user
+};
 
 exports.findUserFromChatId = function (chatId) {
     var users = realm.objects('User').filtered('chatId = ' + chatId);
@@ -59,6 +65,7 @@ exports.createNewUserFromMsg = function (msg) {
 
     try {
         realm.write(() => {
+
             // Create or update user
             realm.create('User', {
                 first_name: tuser.first_name,
