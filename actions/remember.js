@@ -3,6 +3,8 @@
 const chrono = require('chrono-node');
 const realm = require('../model');
 var CronJob = require('cron').CronJob;
+let moment = require('moment');
+let _ = require('lodash');
 
 
 exports.registerRememberAction = function (bot) {

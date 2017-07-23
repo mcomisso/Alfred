@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 
-const _ = require('underscore');
+const _ = require('lodash');
 const s = require("underscore.string");
 const utils = require('../utils');
 
