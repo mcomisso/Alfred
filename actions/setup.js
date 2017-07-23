@@ -20,25 +20,3 @@ exports.registerSetupAction = function (bot) {
         // });
     });
 };
-
-
-/*
-*
-*
-* { message_id: 252,
-  from:
-   { id: 3729713,
-     first_name: 'Matteo',
-     last_name: 'Comisso',
-     username: 'teomatteo89',
-     language_code: 'en-IT' },
-  chat:
-   { id: 3729713,
-     first_name: 'Matteo',
-     last_name: 'Comisso',
-     username: 'teomatteo89',
-     type: 'private' },
-  date: 1500724907,
-  text: '/cats',
-  entities: [ { type: 'bot_command', offset: 0, length: 5 } ] }
-* */
