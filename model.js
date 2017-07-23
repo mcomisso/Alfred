@@ -37,6 +37,21 @@ exports.findUserFromChatId = function (chatId) {
     return users[0];
 };
 
+exports.createReminder = function (chatId, message, date) {
+    const user = this.findUserFromChatId(chatId);
+    try {
+        realm.write(() => {
+            realm.create('Reminder', {
+                id: chatId,
+                text: message,
+                date: date,
+            });
+        });
+    } catch (e) {
+        console.error(e.message);
+    }
+};
+
 exports.createNewUserFromMsg = function (msg) {
     console.log(msg);
 
