@@ -10,6 +10,8 @@ const chrono = require('chrono-node');
 const s = require("underscore.string");
 const cats = require('cats-js');
 
+const botanio = require('./botan');
+
 // Telegram BOT API
 const TelegramBot = require('node-telegram-bot-api');
 
@@ -26,6 +28,8 @@ const utils = require('./utils');
 const bot = new TelegramBot(process.env.TELEGRAM_TOKEN, {polling: true});
 
 bot.onText(/\/weather(.+)?/, function(msg, match) {
+
+    botanio.trackMessage(msg, 'weather');
 
     const chatId = msg.chat.id;
 
@@ -99,6 +103,8 @@ bot.onText(/\/weather(.+)?/, function(msg, match) {
 bot.onText(/\/remember (.+)/, function (msg, match) {
     // memo
 
+    botanio.trackMessage(msg, remember);
+
     // scheduler
 
     var dateResults = chrono.parse(match.join(' '));
@@ -115,6 +121,8 @@ bot.onText(/\/remember (.+)/, function (msg, match) {
 const http = require('http');
 bot.onText(/\/cats/, function (msg, match) {
     var c = new cats();
+
+    botanio.trackMessage(msg, 'cats');
 
     c.get().then(cat => {
         //console.log(cat);
