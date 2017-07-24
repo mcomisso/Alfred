@@ -1,7 +1,7 @@
 'use strict';
 
 let chrono = require('chrono-node');
-let realm = require('../model');
+let model = require('../model');
 let CronJob = require('cron').CronJob;
 let moment = require('moment');
 let _ = require('lodash');
@@ -33,8 +33,8 @@ exports.registerRememberAction = function (bot) {
 
         let alertText = "";
 
-        // Save the reminder into realm
-        realm.createReminder(msg.chat.id, alertText, alertDate);
+        // Save the reminder into database
+        model.createReminder(msg.chat.id, alertText, alertDate);
 
         let reminderCronJob = new CronJob(alertDate, function () {
 

@@ -58,7 +58,3 @@ typings/
 .env
 
 .idea
-default.realm
-/default.realm.lock
-/default.realm.management
-/realm-object-server
