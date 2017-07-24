@@ -1,7 +1,7 @@
 'use strict';
 
 // Import library
-const Realm = require('realm');
+const mongo = require('mongodb');
 
 // SCHEMA DEFINITION
 const ReminderSchema = {
@@ -31,31 +31,29 @@ const UserSchema = {
 
 // FUNCTIONS
 
-let realm = new Realm({schema: [ReminderSchema, UserSchema], schemaVersion: 3});
-
 exports.listRemindersForUser = function (chatId) {
     let user = this.findUserFromChatId(chatId);
-    user
+
 };
 
 exports.findUserFromChatId = function (chatId) {
-    var users = realm.objects('User').filtered('chatId = ' + chatId);
-    return users[0];
+    // var users = realm.objects('User').filtered('chatId = ' + chatId);
+    // return users[0];
 };
 
 exports.createReminder = function (chatId, message, date) {
     const user = this.findUserFromChatId(chatId);
-    try {
-        realm.write(() => {
-            realm.create('Reminder', {
-                id: chatId,
-                text: message,
-                date: date,
-            });
-        });
-    } catch (e) {
-        console.error(e.message);
-    }
+    // try {
+    //     realm.write(() => {
+    //         realm.create('Reminder', {
+    //             id: chatId,
+    //             text: message,
+    //             date: date,
+    //         });
+    //     });
+    // } catch (e) {
+    //     console.error(e.message);
+    // }
 };
 
 exports.createNewUserFromMsg = function (msg) {
@@ -63,19 +61,19 @@ exports.createNewUserFromMsg = function (msg) {
 
     const tuser = msg.from;
 
-    try {
-        realm.write(() => {
-
-            // Create or update user
-            realm.create('User', {
-                first_name: tuser.first_name,
-                last_name: tuser.last_name,
-                username: tuser.username,
-                chatId: tuser.id
-            }, true);
-        });
-    } catch (e) {
-        console.error(e.message);
-    }
+    // try {
+    //     realm.write(() => {
+    //
+    //         // Create or update user
+    //         realm.create('User', {
+    //             first_name: tuser.first_name,
+    //             last_name: tuser.last_name,
+    //             username: tuser.username,
+    //             chatId: tuser.id
+    //         }, true);
+    //     });
+    // } catch (e) {
+    //     console.error(e.message);
+    // }
 
 };

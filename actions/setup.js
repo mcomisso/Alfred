@@ -1,7 +1,7 @@
 'use strict';
 
 
-const realm = require('../model');
+const model = require('../model');
 
 // Setup: Save username/chatId
 
@@ -11,7 +11,7 @@ exports.registerSetupAction = function (bot) {
 
         var message = "Dear " + msg.from.first_name + ", please let me know your preferences.";
 
-        realm.createNewUserFromMsg(msg);
+        model.createNewUserFromMsg(msg);
         bot.sendMessage(msg.chat.id, "Saved");
 
         // Ask for nickname
