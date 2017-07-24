@@ -16,7 +16,9 @@ exports.checkUrlExists = function (Url, callback) {
         callback( r.statusCode == 200);});
 
     req.on('error', (e) => {
+        console.log(Url);
         console.error(`problem with request: ${e.message}`);
+        callback(false);
     });
 
     req.end();
