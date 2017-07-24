@@ -1,35 +1,37 @@
 'use strict';
 
 // Import library
-const mongo = require('mongodb');
+let MongoClient = require('mongodb').MongoClient
+    , assert = require('assert');
 
-// SCHEMA DEFINITION
-const ReminderSchema = {
-    name: 'Reminder',
-    primaryKey: 'id',
-    properties: {
-        id: 'int',
-        chatId: 'int',
-        text: 'string',
-        date: 'date',
-    }
+
+// Connection URL
+let MONGO_URL = process.env.MONGO_CONNECTION;
+// Use connect method to connect to the server
+
+var insertMessage = function (db, message, callback) {
+    var collection = db.collection('messages');
+    collection.insertOne(message, function (err, result) {
+        assert.equal(err, null);
+
+        callback(result);
+    });
+
 };
-
-const UserSchema = {
-    name: 'User',
-    primaryKey: 'chatId',
-    properties: {
-        chatId: 'int',
-        first_name: 'string',
-        last_name: 'string',
-        username: 'string',
-        reminders: {type: 'list', objectType: 'Reminder'},
-    }
-};
-
-
 
 // FUNCTIONS
+
+exports.saveMessage = function (msg) {
+    MongoClient.connect(MONGO_URL, function(err, db) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+
+
+        insertMessage(db, msg, function() {
+            db.close();
+        });
+    });
+};
 
 exports.listRemindersForUser = function (chatId) {
     let user = this.findUserFromChatId(chatId);
