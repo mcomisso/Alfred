@@ -21,8 +21,6 @@ exports.registerCatAction = function (bot) {
             utils.checkUrlExists(cat.images.image.url, function (success) {
                 if (success) {
                     bot.sendPhoto(msg.chat.id, cat.images.image.url);
-                } else {
-                    bot.sendMessage(msg.chat.id, "This cat ran away! :(");
                 }
             });
         }).catch((err) => {
