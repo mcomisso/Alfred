@@ -22,7 +22,7 @@ const TelegramBot = require('node-telegram-bot-api');
 
 
 
-const bot = new TelegramBot(token, {polling: true});
+const bot = new TelegramBot(token, { polling: true });
 
 cats.registerCatAction(bot);
 weather.registerWeatherAction(bot);
