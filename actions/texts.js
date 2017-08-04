@@ -8,7 +8,7 @@ exports.registerTextsAction = function (bot) {
     bot.on('message', function (msg) {
         // save the message in database
 
-        if (msg == "(╯°□°）╯︵ ┻━┻") {
+        if (msg.contains("┻━┻")) {
             bot.sendMessage(msg.chat.id, "┬─┬ ノ( ゜-゜ノ)");
         }
 
