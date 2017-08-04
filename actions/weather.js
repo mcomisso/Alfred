@@ -27,7 +27,7 @@ exports.registerWeatherAction = function (bot) {
 
         var switchValue;
         if (_.isUndefined(match[1]) || _.isEmpty(match[1])) {
-            switchValue = "now";
+            switchValue = "today";
         } else {
             switchValue = s(match[1]).trim().value();
         }
