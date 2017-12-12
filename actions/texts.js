@@ -12,10 +12,8 @@ exports.registerTextsAction = function (bot) {
             bot.sendMessage(msg.chat.id, "┬─┬ ノ( ゜-゜ノ)");
         }
 
-        var message = "" + msg.from.first_name + ": " + msg.text;
-
-        bot.sendMessage(process.env.MATT_CHAT, message, { disable_notification: true });
-
-        db.saveMessage(msg);
+        // var message = "" + msg.from.first_name + ": " + msg.text;
+        // bot.sendMessage(process.env.MATT_CHAT, message, { disable_notification: true });
+        // db.saveMessage(msg);
     });
 }

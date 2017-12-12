@@ -9,14 +9,17 @@ let MongoClient = require('mongodb').MongoClient
 let MONGO_URL = process.env.MONGO_CONNECTION;
 // Use connect method to connect to the server
 
+
+/************************
+* MESSAGES
+* */
+
 var insertMessage = function (db, message, callback) {
     var collection = db.collection('messages');
     collection.insertOne(message, function (err, result) {
         assert.equal(err, null);
-
         callback(result);
     });
-
 };
 
 // FUNCTIONS
@@ -39,43 +42,49 @@ exports.listRemindersForUser = function (chatId) {
 };
 
 exports.findUserFromChatId = function (chatId) {
+
     // var users = realm.objects('User').filtered('chatId = ' + chatId);
     // return users[0];
 };
 
 exports.createReminder = function (chatId, message, date) {
     const user = this.findUserFromChatId(chatId);
-    // try {
-    //     realm.write(() => {
-    //         realm.create('Reminder', {
-    //             id: chatId,
-    //             text: message,
-    //             date: date,
-    //         });
-    //     });
-    // } catch (e) {
-    //     console.error(e.message);
-    // }
 };
 
 exports.createNewUserFromMsg = function (msg) {
     console.log(msg);
-
     const tuser = msg.from;
+};
 
-    // try {
-    //     realm.write(() => {
-    //
-    //         // Create or update user
-    //         realm.create('User', {
-    //             first_name: tuser.first_name,
-    //             last_name: tuser.last_name,
-    //             username: tuser.username,
-    //             chatId: tuser.id
-    //         }, true);
-    //     });
-    // } catch (e) {
-    //     console.error(e.message);
-    // }
 
+
+/*******************
+* MOVIES
+* */
+
+exports.numberOfMovies = function() {
+
+
+
+    return 10;
+};
+
+exports.saveMovieFromMsg = function(msg) {
+    console.log(msg);
+
+    // Get actual user object
+    const user = msg.from;
+
+};
+
+exports.fetchRandomMovie = function (msg) {
+    // Retrieve a random movie
+};
+
+exports.toggleSeenStatus = function (msg) {
+    // Toggle seen status
+};
+
+exports.deleteMovieAtIndex = function (msg) {
+    // Remove
 };

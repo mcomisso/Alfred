@@ -32,7 +32,6 @@ exports.registerWeatherAction = function (bot) {
             switchValue = s(match[1]).trim().value();
         }
 
-
         switch (switchValue) {
 
             case "now":

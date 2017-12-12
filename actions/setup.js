@@ -19,4 +19,14 @@ exports.registerSetupAction = function (bot) {
         //     console.log(reply);
         // });
     });
+
+
+    bot.onText(/\/alert (.+)/, function (msg, match) {
+
+        let confirmation = match[1] === 'on' ? "You will now receive alerts about the daily weather." : "You will not receive any alert";
+
+
+
+        bot.sendMessage(msg.chat.id, confirmation);
+    });
 };

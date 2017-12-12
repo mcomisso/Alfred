@@ -12,6 +12,7 @@ const setup = require('./actions/setup');
 const weather = require('./actions/weather');
 const remember = require('./actions/remember');
 const texts = require('./actions/texts');
+const movies = require('./actions/movies');
 
 // Telegram BOT API
 const TelegramBot = require('node-telegram-bot-api');
@@ -29,3 +30,4 @@ weather.registerWeatherAction(bot);
 setup.registerSetupAction(bot);
 remember.registerRememberAction(bot);
 texts.registerTextsAction(bot);
+movies.registerMoviesAction(bot);
