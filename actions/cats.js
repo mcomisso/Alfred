@@ -15,17 +15,17 @@ exports.registerCatAction = function (bot) {
 
         console.log(msg);
         c.get().then(cat => {
-            //console.log(cat);
-            //console.log(cat.images.image.url);
 
             utils.checkUrlExists(cat.images.image.url, function (success) {
                 if (success) {
                     bot.sendPhoto(msg.chat.id, cat.images.image.url);
+                } else {
+                    throw "URL wasn't reachable.";
                 }
             });
         }).catch((err) => {
             console.error(err.message);
-            bot.sendMessage(msg.chat.id, 'Cat ran away! :(');
+            bot.sendMessage(msg.chat.id, 'This cat ran away! :(');
         });
     });
 

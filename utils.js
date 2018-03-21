@@ -1,27 +1,29 @@
 'use strict';
 
 const _ = require('lodash');
+const request = require('request');
 
 let http = require('http');
 let url = require('url');
 
-exports.checkUrlExists = function (Url, callback) {
-    let options = {
-        method: 'HEAD',
-        host: url.parse(Url).host,
-        port: 80,
-        path: url.parse(Url).pathname
-    };
-    let req = http.request(options, function (r) {
-        callback( r.statusCode == 200);});
 
-    req.on('error', (e) => {
-        console.log(Url);
-        console.error(`problem with request: ${e.message}`);
+exports.checkUrlExists = function (Url, callback) {
+
+    request.head(Url, function (error, response, body){
+
+        if (error) {
+            console.error(error);
+            callback(false);
+            return;
+        }
+
+        if (response && response.statusCode == 200) {
+            callback(true);
+            return;
+        }
+
         callback(false);
     });
-
-    req.end();
 };
 
 exports.calculateMinMax = function (values, key) {
