@@ -14,7 +14,7 @@
       "type": "node",
       "request": "launch",
       "name": "Development",
-      "program": "${workspaceRoot}/index.js test"
+      "program": "${workspaceRoot}/index.js"
     }
   ]
 }
