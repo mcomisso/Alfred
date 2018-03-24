@@ -2,8 +2,6 @@
 
 const _ = require('lodash');
 const request = require('request');
-
-let http = require('http');
 let url = require('url');
 
 
