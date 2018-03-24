@@ -2,14 +2,10 @@
 const cats = require('cats-js');
 const utils = require('../utils');
 
-const botanio = require('../botan');
-
 exports.registerCatAction = function (bot) {
 
     bot.onText(/\/cats/, function (msg, match) {
         var c = new cats();
-
-        botanio.trackMessage(msg, 'cats');
 
         bot.sendChatAction(msg.chat.id, 'upload_photo');
 

@@ -6,17 +6,10 @@ let CronJob = require('cron').CronJob;
 let moment = require('moment');
 let _ = require('lodash');
 
-let botanio = require('../botan');
-
-
 exports.registerRememberAction = function (bot) {
     bot.onText(/\/remember(.+)/, (msg, match) => {
 
         // memo
-
-        // scheduler
-
-        botanio.trackMessage(msg, 'remember');
 
         let fullCommand = match.join(' ');
 
