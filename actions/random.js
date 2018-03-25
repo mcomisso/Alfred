@@ -31,7 +31,6 @@ var giphyFromWordToMessage = function(bot, word, msg) {
             return;
         }
         bot.sendDocument(msg.chat.id, res.data.image_original_url, {caption: word});
-        console.log(res);
     });
 };
 
