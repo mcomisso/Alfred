@@ -9,6 +9,9 @@ const utils = require('../utils');
 const DarkSky = require('dark-sky');
 const forecast = new DarkSky(process.env.DARKSKY_TOKEN);
 
+// Coordinates api
+const getCoords = require('city-to-coords');
+
 // Home position
 const LATITUDE = 51.486417;
 const LONGITUDE = -0.211119;
@@ -71,6 +74,16 @@ exports.registerWeatherAction = function (bot) {
                 break;
 
             default:
+                getCoords(switchValue)
+                    .then((coords) => {
+                        forecast.latitude(coords.lat).longitude(coords.lng).units('si').get().then((response)=>{
+                            var message = response.hourly.summary;
+                            var temps = utils.calculateMinMax(response.hourly.data, 'temperature');
+                            message = message + " There will be a high of " + Math.round(temps['max']) + "°C and a min of " + Math.round(temps['min']) + "°C.";
+                            bot.sendMessage(chatId, message);
+                        });
+                    });
+                return;
                 break;
 
         }
