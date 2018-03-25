@@ -1,6 +1,6 @@
 'use strict';
 
-const giphy = require('giphy-api')('wWv4Mbmn3Yyn77TWV6xtMGEhx4S6TyJd');
+const giphy = require('giphy-api')(process.env.GIPHY_DEVELOPMENT_KEY);
 const http = require('http');
 
 const request = require('request');
