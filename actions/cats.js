@@ -9,7 +9,6 @@ exports.registerCatAction = function (bot) {
 
         bot.sendChatAction(msg.chat.id, 'upload_photo');
 
-        console.log(msg);
         c.get().then(cat => {
 
             utils.checkUrlExists(cat.images.image.url, function (success) {
