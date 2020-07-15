@@ -18,7 +18,7 @@
     "dark-sky": "^1.1.4",
     "dotenv": "^5.0.1",
     "giphy-api": "^1.2.7",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "moment": "^2.22.2",
     "mongodb": "^2.2.36",
     "node-telegram-bot-api": "^0.30.x",
