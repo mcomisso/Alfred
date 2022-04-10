@@ -20,7 +20,7 @@
     "giphy-api": "^1.2.7",
     "lodash": "^4.17.11",
     "moment": "^2.29.2",
-    "mongodb": "^2.2.36",
+    "mongodb": "^3.1.13",
     "node-telegram-bot-api": "^0.30.x",
     "request": "^2.88.0",
     "underscore.string": "^3.3.5"
